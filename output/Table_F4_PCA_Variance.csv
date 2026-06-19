@@ -1,0 +1,11 @@
+PC,Varianza (%),Acumulada (%),ρ_Spearman_IMF,p_value,Sig. (α=0.05),Interpretación
+PC1,38.48,38.48,-0.7502,0.0,Sí,Gradiente composición (Mg vs Fe/Mn)
+PC2,18.83,57.31,0.4483,0.0,Sí,Estado instrumental / sesión analítica
+PC3,13.62,70.93,-0.0038,0.95099836,No,"Posición geométrica (X, Y)"
+PC4,9.2,80.13,0.0355,0.56047664,No,Interacción IP – vacío (OH/O)
+PC5,8.45,88.58,-0.1177,0.05300922,No,Residual mixto instrumental
+PC6,6.03,94.61,-0.003,0.96111661,No,—
+PC7,3.6,98.21,0.1033,0.08956763,No,—
+PC8,1.28,99.5,0.0327,0.59160409,No,—
+PC9,0.5,100.0,0.0898,0.1401944,No,—
+PC10,0.0,100.0,0.0291,0.6329868,No,—

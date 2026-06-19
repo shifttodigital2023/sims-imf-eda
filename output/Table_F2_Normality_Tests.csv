@@ -1,0 +1,11 @@
+Variable,Skewness,Ex_Kurtosis,CV (%),SW_stat,SW_pvalue,SW_Normal,JB_stat,JB_pvalue,JB_Normal,Transform_rec,Scaler_rec
+IP (nA),-2.0771,3.1231,12.8,0.656961,0.0,NO,305.0118,0.0,NO,"Potencia (x^k, k>1) / reflexión+log",RobustScaler
+X (µm),0.087,-1.1387,-543.17,0.962492,2e-06,NO,14.9836,0.000558,NO,Ninguna — ~simétrica,StandardScaler
+Y (µm),0.5395,-0.1979,-158.31,0.971494,3.1e-05,NO,13.5895,0.00112,NO,√x o Box-Cox,RobustScaler
+DTFX (V),-0.1306,-1.4431,-92.38,0.908832,0.0,NO,24.285,5e-06,NO,Ninguna — ~simétrica,StandardScaler
+DTFY (V),0.3711,-0.4824,-67.19,0.940334,0.0,NO,8.8479,0.011987,NO,Ninguna — ~simétrica,StandardScaler
+¹⁶O¹H/¹⁶O,0.7117,-0.1595,56.91,0.925518,0.0,NO,23.1642,9e-06,NO,√x o Box-Cox,RobustScaler
+MgCO₃ (mol%),-0.2965,-1.3158,43.94,0.878703,0.0,NO,23.5216,8e-06,NO,Ninguna — ~simétrica,StandardScaler
+CaCO₃ (mol%),-0.7151,0.4635,1.16,0.901498,0.0,NO,25.521,3e-06,NO,Box-Cox (λ > 1),RobustScaler moderado
+MnCO₃ (mol%),0.2163,-1.1362,71.32,0.892254,0.0,NO,16.6912,0.000237,NO,Ninguna — ~simétrica,StandardScaler
+FeCO₃ (mol%),0.3371,-1.3155,75.88,0.868974,0.0,NO,24.6731,4e-06,NO,Ninguna — ~simétrica,StandardScaler

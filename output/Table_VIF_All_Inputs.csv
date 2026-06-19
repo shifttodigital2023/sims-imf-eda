@@ -1,0 +1,11 @@
+Variable,VIF,R²_j,Diagnóstico
+IP (nA),2.79,0.642159,OK  (< 5)
+X (µm),1.41,0.292722,OK  (< 5)
+Y (µm),2.49,0.598515,OK  (< 5)
+DTFX (V),2.87,0.65174,OK  (< 5)
+DTFY (V),7.72,0.870547,MODERADO (5–10)
+$^{16}$O$^{1}$H/$^{16}$O,1.26,0.207638,OK  (< 5)
+MgCO₃ (mol%),231459.69,0.999996,SEVERO  (VIF ≥ 10)
+CaCO₃ (mol%),465.12,0.99785,SEVERO  (VIF ≥ 10)
+MnCO₃ (mol%),12.51,0.920062,SEVERO  (VIF ≥ 10)
+FeCO₃ (mol%),200104.33,0.999995,SEVERO  (VIF ≥ 10)

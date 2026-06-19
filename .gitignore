@@ -1,0 +1,24 @@
+# Dataset — no es autoría propia (citar Śliwińśki et al. 2015)
+*.xlsx
+*.xls
+
+# Entorno virtual
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+.claude/
+
+# Lock files de Office
+~$*
+
+# IDEs
+.vscode/
+.idea/

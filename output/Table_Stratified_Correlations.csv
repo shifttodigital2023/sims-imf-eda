@@ -1,0 +1,7 @@
+Par,ρ_global,ρ_centro,ρ_periferia,Δρ
+Acoplamiento X → deflector,-0.085,-0.31,0.062,0.372
+Acoplamiento Y → deflector,0.352,0.34,0.351,0.011
+Acoplamiento entre deflectores,0.658,0.688,0.625,-0.063
+Efecto matriz Mg → IMF,-0.871,-0.851,-0.914,-0.064
+Efecto matriz Fe → IMF,0.878,0.828,0.928,0.1
+Corriente haz → IMF,-0.297,-0.253,-0.352,-0.099
