@@ -71,6 +71,52 @@ Reference version received: 2026-06-18.
   3. The same per-fold logic must be applied inside the CV inner loop (fit shift and scaler on fold train only).
   - **Note:** The shift parameter must be estimated on the training fold only and applied to the validation/test fold — fitting it on the full dataset would constitute data leakage.
 
+### P4 — Positional column mapping with no name validation (+ N_INPUTS misconfigured)
+- **Severity:** Critical
+- **Location:** Lines 705–706 (constants); lines 1644–1654 (data loading block)
+- **Description:** The pipeline extracts features using purely positional slicing:
+  ```python
+  N_LABELS  = 7
+  N_INPUTS  = 9          # ← placeholder; actual dataset has 10 inputs
+  ...
+  inputs_df = df.iloc[:, N_LABELS : N_LABELS + N_INPUTS]   # cols 7–15
+  y_series  = df.iloc[:, -1]                                # last col
+  ```
+  Two distinct problems share this root cause:
+
+  **4a — N_INPUTS is 9, not 10 (script is unrunnable on the actual dataset)**
+  The dataset filename encodes the structure: `7labels_10inputs_n271.xlsx`. With N_INPUTS=9, `expected_cols = 7+9+1 = 17`, but the file has 18 columns. The validation at line 1644 raises `ValueError: Column count mismatch: 18 columns found, 17 expected`. The `.py` file has never had its STEP 1 constants updated from their default placeholder values (`N_INPUTS=9`, `FILE_PATH="data.xlsx"`). The geology team presumably ran from the `.ipynb` session with manual edits; the `.py` script as committed cannot be executed on the actual dataset.
+
+  **4b — Column identity is never verified, only column count**
+  After fixing N_INPUTS to 10, `inputs_df` becomes `df.iloc[:, 7:17]`. There is no check that column 7 is IP, column 8 is X, etc. If a user reorders columns in Excel (e.g., moves IP to position 9, or inserts a new metadata column), the slice silently picks up different variables. The model trains without error but on the wrong features. This failure mode is completely invisible: predictions are produced, metrics look plausible, and no exception is raised.
+
+- **Statistical impact:**
+  - 4a: pipeline halts on execution — no output produced.
+  - 4b: if columns are reordered, all trained models silently learn the wrong input→output mapping. Feature importance, SHAP attributions, and predictions are all corrupted with no diagnostic signal.
+
+- **Proposed correction:**
+  ```python
+  # STEP 1 — update placeholders to match actual dataset
+  FILE_PATH = "Data_Sliwinski_2015_ no vacuum_7labels_10inputs_n271.xlsx"
+  N_LABELS  = 7
+  N_INPUTS  = 10   # ← was 9
+
+  # After loading, add explicit column-name validation:
+  EXPECTED_INPUT_COLS = [
+      "IP", "X", "Y", "DTFX", "DTFY",
+      "16OH/16O", "MgCO3", "CaCO3", "MnCO3", "FeCO3",
+  ]   # verify exact header strings against the file
+  actual_inputs = df.columns[N_LABELS : N_LABELS + N_INPUTS].tolist()
+  if actual_inputs != EXPECTED_INPUT_COLS:
+      raise ValueError(
+          f"Input column mismatch.\n"
+          f"  Expected: {EXPECTED_INPUT_COLS}\n"
+          f"  Found:    {actual_inputs}\n"
+          "Check column order in the source file."
+      )
+  ```
+  This converts a silent data-corruption failure into an explicit error at load time.
+
 ---
 
 ## EDA-to-Pipeline Linkage
