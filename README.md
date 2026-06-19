@@ -4,7 +4,7 @@ Statistical audit and EDA contribution to a Q1 geosciences manuscript on
 Instrumental Mass Fractionation (IMF) prediction by SIMS using machine learning.
 
 **Task:** Statistical review
-**Pipeline authors:** Geology team (not included in this repository).
+**ML Pipeline authors:** not included in this repository.
 
 > [!note] 
 > Place the `.xlsx` file in `../data/` before running the scripts.
